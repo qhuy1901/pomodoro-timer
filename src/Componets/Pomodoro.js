@@ -111,39 +111,25 @@ const PomodoroTimer = () => {
 
   return (
     <div style={styles.container}>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          backgroundColor: "#ccffff",
-          borderRadius: "8px",
-          padding: "20px",
-          width: "35%",
-          margin: "0 auto",
-          alignItems: "center",
-          "& > *": {
-            m: 1,
-          },
-        }}
-      >
+      <Box style={styles.pomodoroTimerBox}>
         <h1>Pomodoro Timer</h1>
         <ButtonGroup size="large" aria-label="Pomodoro Timer">
           <Button
-            key="one"
+            key="Promodoro"
             onClick={() => changeActiveTab(PROMODORO)}
             variant={activeTab === PROMODORO ? "contained" : "outlined"}
           >
             Pomodoro
           </Button>
           <Button
-            key="two"
+            key="Short Break"
             onClick={() => changeActiveTab(SHORT_BREAK)}
             variant={activeTab === SHORT_BREAK ? "contained" : "outlined"}
           >
             Short Break
           </Button>
           <Button
-            key="three"
+            key="Long Break"
             onClick={() => changeActiveTab(LONG_BREAK)}
             variant={activeTab === LONG_BREAK ? "contained" : "outlined"}
           >
@@ -196,6 +182,16 @@ const styles = {
     justifyContent: "center",
     gap: "10px",
   },
+  pomodoroTimerBox: {
+    display: "flex",
+    flexDirection: "column",
+    backgroundColor: "#ccffff",
+    borderRadius: "8px",
+    padding: "20px 50px 50px 50px",
+    width: "fit-content",
+    margin: "0 auto",
+    alignItems: "center"
+  }
 };
 
 export default PomodoroTimer;
