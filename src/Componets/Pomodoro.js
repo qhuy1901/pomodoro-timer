@@ -16,6 +16,11 @@ const PomodoroTimer = () => {
   const [activeTab, setActiveTab] = useState(PROMODORO);
   const intervalRef = useRef(null);
 
+  useEffect(() => {
+    // Update the timer when activeTab has changed completely
+    setTimerByActiveTab();
+  }, [activeTab]);
+
   // Function to start the timer
   const startTimer = () => {
     if (!isActive) {
@@ -28,16 +33,9 @@ const PomodoroTimer = () => {
     setIsActive(false);
   };
 
-  // Function to reset the timer back to the initial value
-  const resetTimer = () => {
-    setIsActive(false);
-    setTime(initialTime);
-  };
-
-  // Function to change the active tab and set the time accordingly
-  const changeActiveTab = (tab) => {
-    setActiveTab(tab);
-    switch (tab) {
+  // Function to set the timer based on the active tab
+  const setTimerByActiveTab = () => {
+    switch (activeTab) {
       case PROMODORO:
         setTime(25 * 60);
         break;
@@ -50,6 +48,17 @@ const PomodoroTimer = () => {
       default:
         break;
     }
+  };
+
+  // Function to reset the timer back to the initial value
+  const resetTimer = () => {
+    setIsActive(false);
+    setTimerByActiveTab();
+  };
+
+  // Function to change the active tab and set the time accordingly
+  const changeActiveTab = (tab) => {
+    setActiveTab(tab);
     setIsActive(false);
   };
 
