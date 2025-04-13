@@ -8,13 +8,20 @@ const PomodoroTimer = () => {
   const PROMODORO = "Pomodoro";
   const SHORT_BREAK = "Short Break";
   const LONG_BREAK = "Long Break";
+  const POMODORO_INIT_TIME = 25 * 60; // 25 minutes in seconds
+  const SHORT_BREAK_INIT_TIME = 5 * 60; // 5 minutes in seconds
+  const LONG_BREAK_INIT_TIME = 15 * 60; // 15 minutes in seconds
 
   // Set the initial time to 25 minutes (in seconds)
-  const initialTime = 25 * 60;
+  const initialTime = POMODORO_INIT_TIME;
   const [time, setTime] = useState(initialTime);
   const [isActive, setIsActive] = useState(false);
   const [activeTab, setActiveTab] = useState(PROMODORO);
   const intervalRef = useRef(null);
+
+  // Create a ref for the audio element
+  const endPomodoroAudioRef = useRef(new Audio(process.env.PUBLIC_URL + "/audio/end-pomodoro.mp3"));
+  const endBreakAudioRef = useRef(new Audio(process.env.PUBLIC_URL + "/audio/end-break.mp3"));
 
   useEffect(() => {
     // Update the timer when activeTab has changed completely
@@ -37,13 +44,13 @@ const PomodoroTimer = () => {
   const setTimerByActiveTab = () => {
     switch (activeTab) {
       case PROMODORO:
-        setTime(25 * 60);
+        setTime(POMODORO_INIT_TIME);
         break;
       case SHORT_BREAK:
-        setTime(5 * 60);
+        setTime(SHORT_BREAK_INIT_TIME);
         break;
       case LONG_BREAK:
-        setTime(15 * 60);
+        setTime(LONG_BREAK_INIT_TIME);
         break;
       default:
         break;
@@ -67,11 +74,17 @@ const PomodoroTimer = () => {
     if (isActive) {
       intervalRef.current = setInterval(() => {
         setTime((prevTime) => {
-          // If the time reaches zero, stop the timer
+          // If the time reaches zero, stop the timer and play sound
           if (prevTime <= 1) {
             clearInterval(intervalRef.current);
             setIsActive(false);
-            return 0;
+            if (activeTab === PROMODORO) {
+              endPomodoroAudioRef.current.play(); // Play the end sound
+            }
+            else {
+              endBreakAudioRef.current.play(); // Play the end sound
+            }
+            return 0; // Reset time to 0
           }
           return prevTime - 1;
         });
