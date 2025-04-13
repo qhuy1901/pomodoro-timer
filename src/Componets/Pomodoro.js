@@ -28,6 +28,11 @@ const PomodoroTimer = () => {
     setTimerByActiveTab();
   }, [activeTab]);
 
+  useEffect(() => {
+    // Update the document title with the formatted time
+    document.title = `${formatTime(time)} - ${activeTab}`;
+  }, [time, activeTab]);
+
   // Function to start the timer
   const startTimer = () => {
     if (!isActive) {
