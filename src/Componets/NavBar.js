@@ -15,7 +15,7 @@ return (
                     variant="h6"
                     noWrap
                     component="a"
-                    href="/"
+                    href="/pomodoro-timer"
                     sx={{
                         fontFamily: "monospace",
                         fontWeight: 700,

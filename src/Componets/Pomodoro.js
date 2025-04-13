@@ -185,12 +185,13 @@ const styles = {
   pomodoroTimerBox: {
     display: "flex",
     flexDirection: "column",
-    backgroundColor: "#ccffff",
+    backgroundColor: "#b3ffff",
     borderRadius: "8px",
     padding: "20px 50px 50px 50px",
     width: "fit-content",
     margin: "0 auto",
-    alignItems: "center"
+    alignItems: "center",
+    boxShadow: "0 2px 1px -1px rgba(0, 0, 0, .2), 0 1px 1px 0 rgba(0, 0, 0, .14), 0 1px 3px 0 rgba(0, 0, 0, .12)"
   }
 };
 
